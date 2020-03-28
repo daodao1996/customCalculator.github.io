@@ -25,15 +25,16 @@ function getERPExpectedAmount(totalData) {
   let actualAmount = get4STotalAmount(totalData[0], totalData[1]);
   let excepted = actualAmount.map(item => {
     let erpItem = totalData[2].find(erpItem => {
-      if (erpItem["人工主类型"] === item["labval_type"] && erpItem["人工编号"] === item["labval"])
+      if (erpItem["人工主类型"] === item["labval_type"] && erpItem["人工编号"] === item["labval"]){
         return erpItem;
+      }
     });
     return {
       "labval_type": item["labval_type"],
       "labval": item["labval"],
       "totalAmount": item["totalAmount"],
-      "ERPExceptedAmount": erpItem["工时标准价"],
-      "difference": item["totalAmount"] - erpItem["工时标准价"]
+      "ERPExceptedAmount": erpItem !== undefined && erpItem !== null ? erpItem["工时标准价"] : "未找到",
+      "difference": erpItem !== undefined && erpItem !== null ? item["totalAmount"] - erpItem["工时标准价"] : "未找到"
     };
   });
 
