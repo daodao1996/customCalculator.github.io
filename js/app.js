@@ -9,7 +9,8 @@ function calculate() {
         workbook = XLSX.read(data, {
           type: 'binary'
         }), // 以二进制流方式读取得到整份excel表格对象
-        persons = []; // 存储获取到的数据
+        allData = []; // 存储获取到的数据
+        // console.log(workbook);
     } catch (e) {
       console.log('文件类型不正确');
       return;
@@ -21,16 +22,15 @@ function calculate() {
     for (let sheet in workbook.Sheets) {
       if (workbook.Sheets.hasOwnProperty(sheet)) {
         fromTo = workbook.Sheets[sheet]['!ref'];
-        console.log(fromTo);
-        persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
-        // break; // 如果只取第一张表，就取消注释这行
+        console.log(fromTo.slice(4));
+        allData.push(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+        //break; // 如果只取第一张表，就取消注释这行
       }
     }
 
-    console.log(persons);
-    let resultBrand = calculateBy(persons, "品牌");
-    // console.log(resultBrand);
-    $("#brand p").html(resultBrand);
+    // console.log(allData);
+    let resultBrand = getERPExpectedAmount(allData);
+    $("#brand p").html(formatString(resultBrand));
   };
   // 以二进制方式打开文件
   fileReader.readAsBinaryString(files);
@@ -39,4 +39,4 @@ function calculate() {
 function loadFileName(e){
   $("#fileName").text(e.files[0].name);
   $("#calculate").removeAttr("disabled");
-}  
+}
