@@ -24,31 +24,13 @@
     <button onclick="calculate()" id="calculate">计算</button>
 </div>
 
-<ul id="myTab" class="nav nav-tabs">
-    <li class="active">
-        <a href="#brand" data-toggle="tab">根据品牌计算</a>
-    </li>
-    <li><a href="#carSystem" data-toggle="tab">根据车系计算</a></li>
-    <li>
-        <a href="#salesUnit" data-toggle="tab">根据店面计算</a>
-    </li>
-</ul>
-
-<div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade in active" id="brand">
-       <p></p>
-    </div>
-    <div class="tab-pane fade" id="carSystem">
-       <p></p>
-    </div>
-    <div class="tab-pane fade" id="salesUnit">
-       <p></p>
-    </div>
+<div class="tab-pane fade in active" id="brand">
+   <p></p>
 </div>
 
 </body>
-<script src="./js/calculateBy.js"></script>
 <script src="./js/app.js"></script>
-<script src="./js/compareTotalAmount.js"></script>
-<script src="./js/downloadExcel.js"></script>
+<script src="js/compareTotalAmountBetweenStoreAndERP.js"></script>
+<script src="js/generateExcel.js"></script>
+<script src="js/readExcelFile.js"></script>
 </html>
