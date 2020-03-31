@@ -4,11 +4,8 @@ function get4SStoreTotalAmount(time, unit) {
   let transformedUnit = getUnitPriceObject(unit);
 
   return transformedTime.map(timeItem => {
-    return {
-      "labval_type": timeItem["labval_type"],
-      "labval": timeItem["labval"],
-      "totalAmount": Math.round(timeItem["value"] * transformedUnit[timeItem.labval_type] * 1000000) / 1000000
-    }
+    timeItem["totalAmount"] = Math.round(timeItem["value"] * transformedUnit[timeItem.labval_type] * 1000000) / 1000000;
+    return timeItem;
   });
 }
 
@@ -18,13 +15,9 @@ function compareStoreAndERP(totalData) {
   let exceptedResult = actualAmount.map(originalItem => {
     let erpRecord = totalData[2].find(erpItem => isMatch(erpItem, originalItem));
 
-    return {
-      "labval_type": originalItem["labval_type"],
-      "labval": originalItem["labval"],
-      "totalAmount": originalItem["totalAmount"],
-      "ERPExceptedAmount": !erpRecord ? "未找到" : parseFloat(erpRecord["工时标准价"]),
-      "difference": !erpRecord ? "未找到" : originalItem["totalAmount"] - parseFloat(erpRecord["工时标准价"])
-    };
+    originalItem["ERPExceptedAmount"] = !erpRecord ? "未找到" : parseFloat(erpRecord["工时标准价"]);
+    originalItem["difference"] = !erpRecord ? "未找到" : originalItem["totalAmount"] - parseFloat(erpRecord["工时标准价"]);
+    return originalItem;
   });
 
   return formatFile(exceptedResult);
