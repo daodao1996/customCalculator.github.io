@@ -18,13 +18,19 @@ function compareStoreAndERP(totalData) {
 
   let exceptedResult = actualAmount.map(originalItem => {
     if (originalItem.totalAmount === "人工主类型缺失") {
-      originalItem["ERPExceptedAmount"] = "ERP无价格";
-      originalItem["difference"] = "ERP无价格";
+      originalItem["ERPExceptedAmount"] = "人工主类型缺失";
+      originalItem["difference"] = "人工主类型缺失";
     } else {
       let erpRecord = totalData[2].find(erpItem => isMatch(erpItem, originalItem));
 
-      originalItem["ERPExceptedAmount"] = !erpRecord ? "ERP无价格" : parseFloat(erpRecord["工时标准价"]);
-      originalItem["difference"] = !erpRecord ? "ERP无价格" : originalItem["totalAmount"] - parseFloat(erpRecord["工时标准价"]);
+      if (!erpRecord) {
+        originalItem["ERPExceptedAmount"] = "未发现";
+        originalItem["difference"] = "未发现";
+      } else {
+        originalItem["ERPExceptedAmount"] = !erpRecord["工时标准价"] ? "ERP无价格" : parseFloat(erpRecord["工时标准价"]);
+        originalItem["difference"] = !erpRecord["工时标准价"] ? "ERP无价格" : originalItem["totalAmount"] - parseFloat(erpRecord["工时标准价"]);
+      }
+
     }
     return originalItem;
   });
