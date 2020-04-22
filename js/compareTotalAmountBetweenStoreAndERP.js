@@ -50,11 +50,11 @@ function formatFile(array) {
   };
   array.forEach((item, index) => {
     if(item["labval_type"] && item["labval"]){
-      sheetData[`A${index+2}`] = {v: item["labval_type"]};
-      sheetData[`B${index+2}`] = {v: item["labval"]};
-      sheetData[`C${index+2}`] = {v: item["totalAmount"]};
-      sheetData[`D${index+2}`] = {v: item["ERPExceptedAmount"]};
-      sheetData[`E${index+2}`] = {v: item["difference"]};
+      sheetData[`A${index+2}`] = {v: item["labval_type"],t: "s"};
+      sheetData[`B${index+2}`] = {v: item["labval"],t: "s"};
+      sheetData[`C${index+2}`] = {v: item["totalAmount"], t: "n"};
+      sheetData[`D${index+2}`] = {v: item["ERPExceptedAmount"], t: "n"};
+      sheetData[`E${index+2}`] = {v: item["difference"], t: "n"};
     }
   });
 
