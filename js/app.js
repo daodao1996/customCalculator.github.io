@@ -1,5 +1,4 @@
 function calculate() {
-  $("#calculate").attr("disabled", "true");
   let files = document.getElementById("excel-file").files[0];
 
   let fileReader = getDataFromExcelFile(compareStoreAndERP, displayCompareResult);
