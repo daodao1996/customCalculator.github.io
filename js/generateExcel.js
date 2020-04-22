@@ -4,10 +4,10 @@ function openDownloadDialog(url, saveName)
   {
     url = URL.createObjectURL(url); // 创建blob地址
   }
-  var aLink = document.createElement('a');
+  let aLink = document.createElement('a');
   aLink.href = url;
   aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
-  var event;
+  let event;
   if(window.MouseEvent) event = new MouseEvent('click');
   else
   {
@@ -19,25 +19,24 @@ function openDownloadDialog(url, saveName)
 
 function sheet2blob(sheet, sheetName) {
   sheetName = sheetName || 'sheet1';
-  var workbook = {
+  let workbook = {
     SheetNames: [sheetName],
     Sheets: {}
   };
   workbook.Sheets[sheetName] = sheet;
   // 生成excel的配置项
-  var wopts = {
+  let wopts = {
     bookType: 'xlsx', // 要生成的文件类型
     bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
     type: 'binary'
   };
-  var wbout = XLSX.write(workbook, wopts);
-  var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+  let wbout = XLSX.write(workbook, wopts);
   // 字符串转ArrayBuffer
   function s2ab(s) {
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
-    for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
+    for (let i=0; i!==s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
     return buf;
   }
-  return blob;
+  return new Blob([s2ab(wbout)], {type: "application/octet-stream"});
 }

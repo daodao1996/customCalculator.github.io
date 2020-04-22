@@ -35,18 +35,31 @@ function compareStoreAndERP(totalData) {
     return originalItem;
   });
 
-  return formatFile(exceptedResult);
+  formatFile(exceptedResult);
+  return exceptedResult;
 }
 
 function formatFile(array) {
-  let aoa = [["人工主类型", "工时编码", "店面总价", "ERP总价", "差值"]];
-  array.forEach(item => {
-    aoa.push([item["labval_type"], item["labval"], item["totalAmount"],
-      item["ERPExceptedAmount"], item["difference"]]);
+  let sheetData = {
+    '!ref': `A1:E${array.length + 1}`,
+    A1: {v: "人工主类型"},
+    B1: {v: "工时编码"},
+    C1: {v: "店面总价"},
+    D1: {v: "ERP总价"},
+    E1: {v: "差值"}
+  };
+  array.forEach((item, index) => {
+    if(item["labval_type"] && item["labval"]){
+      sheetData[`A${index+2}`] = {v: item["labval_type"]};
+      sheetData[`B${index+2}`] = {v: item["labval"]};
+      sheetData[`C${index+2}`] = {v: item["totalAmount"]};
+      sheetData[`D${index+2}`] = {v: item["ERPExceptedAmount"]};
+      sheetData[`E${index+2}`] = {v: item["difference"]};
+    }
   });
-  var sheet = XLSX.utils.aoa_to_sheet(aoa);
-  openDownloadDialog(sheet2blob(sheet), 'result.xlsx');
-  return aoa;
+
+  openDownloadDialog(sheet2blob(sheetData), 'result.xlsx');
+  return sheetData;
 }
 
 function isMatch(erpItem, originalItem) {
