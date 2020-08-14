@@ -3409,7 +3409,7 @@ var fnTyped = {
   flattenChunks: function(chunks) {
     var i, l, len, pos, chunk, result;
 
-    // calculate data length
+    // workingHoursCompare data length
     len = 0;
     for (i=0, l=chunks.length; i<l; i++) {
       len += chunks[i].length;

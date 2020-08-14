@@ -1,5 +1,5 @@
-function calculate() {
-  let files = document.getElementById("excel-file").files[0];
+function accessoriesPriceCompare() {
+  let files = document.getElementById("accessoriesExcelFile").files[0];
 
   let fileReader = getDataFromExcelFile(compareStoreAndERP, displayCompareResult);
   fileReader.readAsBinaryString(files);
@@ -13,10 +13,10 @@ function displayCompareResult(compareResult) {
       displayStr += "<br>";
     }
   });
-  $("#brand p").html(displayStr);
+  $("#comparePriceResult p").html(displayStr);
 }
 
 function loadFileName(e) {
-  $("#fileName").text(e.files[0].name);
-  $("#calculate").removeAttr("disabled");
+  $("#accessoriesFileName").text(e.files[0].name);
+  $("#comparePrice").removeAttr("disabled");
 }

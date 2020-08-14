@@ -17,21 +17,52 @@
     <script type="text/javascript" src='./js-xlsx-master/dist/xlsx.full.min.js'></script>
 </head>
 <body>
-<div>
-    <input type="file" id="excel-file" onchange="loadFileName(this)">
-    <label for="excel-file">选择文件</label>
-    <span id="fileName"></span>
-    <br>
-    <button onclick="calculate()" id="calculate" disabled>计算</button>
-</div>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#accessoriesPriceCompare" data-toggle="tab">
+            配件价格比对
+        </a>
+    </li>
+    <li>
+        <a href="#workingHoursCompare" data-toggle="tab">
+            工时比对
+        </a>
+    </li>
+</ul>
 
-<div class="tab-pane fade in active" id="brand">
-   <p></p>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade" id="workingHoursCompare">
+        <div>
+            <input type="file" id="workHoursFile" class="fileName" onchange="loadFileName(this)">
+            <label for="workHoursFile" class="chooseFile">选择文件</label>
+            <span class="uploadedFile" id="workHoursFileName"></span>
+            <br>
+            <button onclick="workingHoursCompare()" id="compareWorkHours" class="startCal" disabled>计算</button>
+        </div>
+
+        <div class="tab-pane fade in active" id="compareHoursResult">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="tab-pane fade in active" id="accessoriesPriceCompare">
+        <div>
+            <input type="file" id="accessoriesExcelFile" class="fileName" onchange="loadFileName(this)">
+            <label for="accessoriesExcelFile" class="chooseFile">选择文件</label>
+            <span class="uploadedFile" id="accessoriesFileName"></span>
+            <br>
+            <button onclick="accessoriesPriceCompare()" id="comparePrice" class="startCal" disabled>Start</button>
+        </div>
+
+        <div class="tab-pane fade in active" id="comparePriceResult">
+            <p></p>
+        </div>
+    </div>
 </div>
 
 </body>
-<script src="./js/app.js"></script>
-<script src="js/compareTotalAmountBetweenStoreAndERP.js"></script>
-<script src="js/generateExcel.js"></script>
-<script src="js/readExcelFile.js"></script>
+<script src="js/compareWorkHours/compareWorkHours.js"></script>
+<script src="js/compareWorkHours/compareTotalAmountBetweenStoreAndERP.js"></script>
+<script src="js/handleFile/generateExcel.js"></script>
+<script src="js/handleFile/readExcelFile.js"></script>
 </html>

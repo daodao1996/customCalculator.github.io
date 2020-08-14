@@ -1,12 +1,12 @@
-#excel-file{
+#workHoursFile,#accessoriesExcelFile{
     display: none;
 }
 
-#fileName{
+.uploadedFile{
     font-size: 18px;
 }
 
-label{
+.chooseFile{
     margin: 20px;
     display: inline-block;
     width: 200px;
@@ -20,7 +20,7 @@ label{
     cursor: pointer;
 }
 
-#calculate{
+.startCal{
     width: 85px;
     height: 28px;
     margin-left: 20px;
