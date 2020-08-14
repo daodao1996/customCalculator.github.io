@@ -16,7 +16,7 @@ function displayCompareResult(compareResult) {
   $("#compareHoursResult p").html(displayStr);
 }
 
-function loadFileName(e) {
+function loadWorkHourFileName(e) {
   $("#workHoursFileName").text(e.files[0].name);
   $("#compareWorkHours").removeAttr("disabled");
 }

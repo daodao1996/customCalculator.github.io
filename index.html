@@ -33,7 +33,7 @@
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade" id="workingHoursCompare">
         <div>
-            <input type="file" id="workHoursFile" class="fileName" onchange="loadFileName(this)">
+            <input type="file" id="workHoursFile" class="fileName" onchange="loadWorkHourFileName(this)">
             <label for="workHoursFile" class="chooseFile">选择文件</label>
             <span class="uploadedFile" id="workHoursFileName"></span>
             <br>
@@ -47,15 +47,11 @@
 
     <div class="tab-pane fade in active" id="accessoriesPriceCompare">
         <div>
-            <input type="file" id="accessoriesExcelFile" class="fileName" onchange="loadFileName(this)">
+            <input type="file" id="accessoriesExcelFile" class="fileName" onchange="loadAccessoriesFileName(this)">
             <label for="accessoriesExcelFile" class="chooseFile">选择文件</label>
             <span class="uploadedFile" id="accessoriesFileName"></span>
             <br>
             <button onclick="accessoriesPriceCompare()" id="comparePrice" class="startCal" disabled>Start</button>
-        </div>
-
-        <div class="tab-pane fade in active" id="comparePriceResult">
-            <p></p>
         </div>
     </div>
 </div>
@@ -65,4 +61,5 @@
 <script src="js/compareWorkHours/compareTotalAmountBetweenStoreAndERP.js"></script>
 <script src="js/handleFile/generateExcel.js"></script>
 <script src="js/handleFile/readExcelFile.js"></script>
+<script src="js/compareAccessoriesPrice/comparePrice.js"></script>
 </html>
